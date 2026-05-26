@@ -11,10 +11,9 @@ function cn(...inputs: ClassValue[]) {
 interface DocumentPreviewProps {
   data: QuoteData;
   isDarkMode?: boolean;
-  brandKey?: string;
 }
 
-export const DocumentPreview: React.FC<DocumentPreviewProps> = ({ data, isDarkMode = false, brandKey = 'maketa' }) => {
+export const DocumentPreview: React.FC<DocumentPreviewProps> = ({ data, isDarkMode = false }) => {
   const total = useMemo(() => {
     return data.items.reduce((acc, item) => acc + item.quantity * item.price, 0);
   }, [data.items]);
@@ -47,10 +46,10 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({ data, isDarkMo
                   </div>
                   <div className="flex flex-col leading-tight">
                     <span className={`text-2xl font-black block ${isDarkMode ? 'text-white' : 'text-slate-800'}`}>
-                      {brandKey === 'hypernetics' ? 'Hyper' : 'Maketa'}
+                      Hyper
                     </span>
                     <span className={`text-xl font-light italic block -mt-1 ${isDarkMode ? 'text-primary' : 'text-slate-500'}`} style={{ color: isDarkMode ? data.colors.primary : undefined }}>
-                      {brandKey === 'hypernetics' ? 'netics' : 'Studio'}
+                      netics
                     </span>
                   </div>
                 </div>

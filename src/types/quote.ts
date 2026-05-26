@@ -40,22 +40,16 @@ export interface QuoteData {
   includeDetailsPage: boolean;
 }
 
-const standardClauses = [
+const hyperneticsClauses = [
   "Se requiere un anticipo del 50% para dar inicio al proyecto.",
   "El 50% restante deberá liquidarse al momento de la entrega final y antes de la liberación de archivos/sitio.",
   "Los tiempos de entrega están sujetos a la recepción oportuna de información y materiales por parte del cliente.",
   "Esta cotización tiene una vigencia de 30 días naturales a partir de su emisión.",
   "Los precios están sujetos a cambios importantes en la moneda (tipo de cambio) y costos de los proveedores de servicios externos.",
   "Cualquier requerimiento adicional no contemplado en este documento será cotizado por separado.",
-  "Una vez liquidado el proyecto, los derechos de uso del diseño final pertenecen al cliente.",
-  "Hypernetics/Maketa se reserva el derecho de incluir el proyecto en su portafolio profesional.",
-  "*El soporte técnico contempla únicamente acciones correctivas o cambios pequeños que no afecten la estructura general del sitio.",
-];
-
-const hyperneticsClauses = [
-  ...standardClauses.slice(0, 6),
   "Hypernetics se reserva el derecho de incluir el proyecto en su portafolio profesional.",
-  standardClauses[7],
+  "Una vez liquidado el proyecto, los derechos de uso del diseño final pertenecen al cliente.",
+  "*El soporte técnico contempla únicamente acciones correctivas o cambios pequeños que no afecten la estructura general del sitio.",
 ];
 
 export const genericScope = [
@@ -205,50 +199,7 @@ export const genericPaymentConditions = [
   "Vigencia de cotización: 15 días naturales.",
 ];
 
-export const defaultQuote: QuoteData = {
-  includeQuotePage: true,
-  includeScopePage: true,
-  milestones: [...genericMilestones],
-  portfolio: [...genericPortfolio],
-  paymentConditions: [...genericPaymentConditions],
-  additionalLinks: [
-    { title: "LazoX", link: "lazox.com.mx" },
-    { title: "Future Smiles Group", link: "futuresmilesgroup.com.mx" },
-    { title: "CENEAE", link: "maketastudio.com.mx/ceneae/" },
-    { title: "Maketa Studio", link: "maketastudio.com.mx" },
-    { title: "SIEM Business", link: "siem.business" },
-  ],
-  includeDetailsPage: true,
-  clientName: "Omar Arellano",
-  company: "Loto Audio",
-  date: getTodayDate(),
-  folio: "20334",
-  deliveryTime: "20 días hábiles a partir del primer pago.",
-  validity: "30 días naturales",
-  clauses: [...standardClauses],
-  observations: "*EL PRECIO NO INCLUYE IVA",
-  items: [
-    {
-      id: "1",
-      description:
-        "Diseño y maquetación de página web\nDiseño profesional de acuerdo a imagen corporativa.",
-      quantity: 1,
-      price: 5000,
-    },
-  ],
-  logo: null,
-  colors: {
-    primary: "#7db8c5",
-    secondary: "#195b7a",
-    accent: "#5eead4",
-    text: "#1f2937",
-  },
-  packageName: "Paquete Web Corp",
-  note: "Esta cotización no incluye costos de licencias externas, dominios o servicios de terceros.",
-  showItemPrices: false,
-  scope: [],
-  notIncluded: [],
-};
+// The defaultQuote represents the Hypernetics default quote, defined at the bottom of the file.
 
 export const HYPERNETICS_TEMPLATES = [
   {
@@ -581,7 +532,7 @@ export const HYPERNETICS_TEMPLATES = [
   },
 ];
 
-export const hyperneticsDefault: QuoteData = {
+export const defaultQuote: QuoteData = {
   includeScopePage: HYPERNETICS_TEMPLATES[2].includeScopePage ?? true,
   includeQuotePage: HYPERNETICS_TEMPLATES[2].includeQuotePage ?? true,
   milestones: HYPERNETICS_TEMPLATES[2].milestones,
@@ -611,4 +562,9 @@ export const hyperneticsDefault: QuoteData = {
   showItemPrices: HYPERNETICS_TEMPLATES[2].showItemPrices,
   scope: HYPERNETICS_TEMPLATES[2].scope,
   notIncluded: HYPERNETICS_TEMPLATES[2].notIncluded,
+  additionalLinks: [
+    { title: "LazoX", link: "lazox.com.mx" },
+    { title: "Future Smiles Group", link: "futuresmilesgroup.com.mx" },
+    { title: "SIEM Business", link: "siem.business" },
+  ],
 };

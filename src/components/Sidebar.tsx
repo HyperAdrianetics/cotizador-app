@@ -25,7 +25,6 @@ interface SidebarProps {
   duplicateQuote: () => void;
   exportPdf: () => void;
   isDarkMode?: boolean;
-  brandKey: string;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ 
@@ -34,11 +33,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
   resetQuote, 
   duplicateQuote,
   exportPdf,
-  isDarkMode = false,
-  brandKey
+  isDarkMode = false
 }) => {
-  
-  const handleItemChange = (id: string, field: keyof LineItem, value: any) => {
+  const handleItemChange = (id: string, field: keyof LineItem, value: string | number) => {
     const newItems = data.items.map(item => 
       item.id === id ? { ...item, [field]: value } : item
     );
@@ -60,24 +57,24 @@ export const Sidebar: React.FC<SidebarProps> = ({
   };
 
   const applyTemplate = (templateId: string) => {
-    const template = HYPERNETICS_TEMPLATES.find(t => t.id === templateId);
+    const template = HYPERNETICS_TEMPLATES.find(t => t.id === templateId) as unknown as QuoteData;
     if (template) {
       updateQuote({
         packageName: template.packageName,
         clientName: template.clientName,
         company: template.company,
         deliveryTime: template.deliveryTime,
-        note: (template as any).note || '',
+        note: template.note || '',
         items: template.items,
-        showItemPrices: (template as any).showItemPrices ?? false,
-        scope: (template as any).scope || [],
-        notIncluded: (template as any).notIncluded || [],
-        milestones: (template as any).milestones || [],
-        platformCost: (template as any).platformCost,
-        portfolio: (template as any).portfolio || [],
-        paymentConditions: (template as any).paymentConditions || [],
-        addons: (template as any).addons || [],
-        clauses: (template as any).clauses || data.clauses
+        showItemPrices: template.showItemPrices ?? false,
+        scope: template.scope || [],
+        notIncluded: template.notIncluded || [],
+        milestones: template.milestones || [],
+        platformCost: template.platformCost,
+        portfolio: template.portfolio || [],
+        paymentConditions: template.paymentConditions || [],
+        addons: template.addons || [],
+        clauses: template.clauses || data.clauses
       });
     }
   };
@@ -169,31 +166,29 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
       </div>
 
-      {brandKey === 'hypernetics' && (
-        <section className="space-y-4">
-          <h3 className={`text-sm font-bold uppercase tracking-wider flex items-center gap-2 ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`}>
-            <Sparkles className="w-4 h-4" />
-            Plantillas Hypernetics
-          </h3>
-          <div className="grid grid-cols-1 gap-2">
-            {HYPERNETICS_TEMPLATES.map(template => (
-              <button
-                key={template.id}
-                onClick={() => applyTemplate(template.id)}
-                className={`text-left p-3 rounded-xl border text-xs transition-all ${
-                  data.packageName.includes(template.id) || data.packageName.includes(template.name.split('— ')[1])
-                    ? 'border-primary bg-primary/10 text-primary font-bold'
-                    : isDarkMode 
-                      ? 'border-slate-800 bg-slate-900/50 text-slate-400 hover:border-slate-700' 
-                      : 'border-slate-100 bg-slate-50 text-slate-600 hover:border-slate-200'
-                }`}
-              >
-                {template.name}
-              </button>
-            ))}
-          </div>
-        </section>
-      )}
+      <section className="space-y-4">
+        <h3 className={`text-sm font-bold uppercase tracking-wider flex items-center gap-2 ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`}>
+          <Sparkles className="w-4 h-4" />
+          Plantillas Hypernetics
+        </h3>
+        <div className="grid grid-cols-1 gap-2">
+          {HYPERNETICS_TEMPLATES.map(template => (
+            <button
+              key={template.id}
+              onClick={() => applyTemplate(template.id)}
+              className={`text-left p-3 rounded-xl border text-xs transition-all ${
+                data.packageName.includes(template.id) || data.packageName.includes(template.name.split('— ')[1])
+                  ? 'border-primary bg-primary/10 text-primary font-bold'
+                  : isDarkMode 
+                    ? 'border-slate-800 bg-slate-900/50 text-slate-400 hover:border-slate-700' 
+                    : 'border-slate-100 bg-slate-50 text-slate-600 hover:border-slate-200'
+              }`}
+            >
+              {template.name}
+            </button>
+          ))}
+        </div>
+      </section>
 
       <section className="space-y-4">
         <h3 className={`text-sm font-bold uppercase tracking-wider flex items-center gap-2 ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`}>

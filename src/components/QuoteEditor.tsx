@@ -4,16 +4,13 @@ import { Sidebar } from './Sidebar';
 import { DocumentPreview } from './DocumentPreview';
 import html2pdf from 'html2pdf.js';
 import type { QuoteData } from '../types/quote';
-import { Link } from 'react-router-dom';
-import { Home } from 'lucide-react';
-
 interface QuoteEditorProps {
-  brandKey: string;
   initialData: QuoteData;
   isDarkMode?: boolean;
 }
 
-export const QuoteEditor: React.FC<QuoteEditorProps> = ({ brandKey, initialData, isDarkMode = false }) => {
+export const QuoteEditor: React.FC<QuoteEditorProps> = ({ initialData, isDarkMode = false }) => {
+  const brandKey = 'hypernetics';
   const { quote, updateQuote, resetQuote, duplicateQuote } = useQuote(brandKey, initialData);
 
   const exportToPdf = async () => {
@@ -41,7 +38,7 @@ export const QuoteEditor: React.FC<QuoteEditorProps> = ({ brandKey, initialData,
 
     const opt = {
       margin: 0,
-      filename: `Cotizacion_${brandKey}_${quote.folio}.pdf`,
+      filename: `Cotizacion_Hypernetics_${quote.folio}.pdf`,
       image: { type: 'jpeg' as const, quality: 1.0 },
       html2canvas: {
         scale: 2,
@@ -146,14 +143,14 @@ export const QuoteEditor: React.FC<QuoteEditorProps> = ({ brandKey, initialData,
       },
       jsPDF: {
         unit: 'in',
-        format: [8.5, heightInInches],
-        orientation: 'portrait',
+        format: [8.5, heightInInches] as [number, number],
+        orientation: 'portrait' as const,
         compress: true
       },
       pagebreak: { mode: ['css', 'legacy'] }
     };
 
-    const worker = html2pdf().set(opt).from(element).save().then(() => {
+    html2pdf().set(opt).from(element).save().then(() => {
       // 3. Restore the scale transform after generation
       if (wrapper) {
         if (!originalTransform) {
@@ -180,30 +177,25 @@ export const QuoteEditor: React.FC<QuoteEditorProps> = ({ brandKey, initialData,
         duplicateQuote={duplicateQuote}
         exportPdf={exportToPdf}
         isDarkMode={isDarkMode}
-        brandKey={brandKey}
       />
 
       {/* Preview Area */}
       <main className={`flex-grow overflow-y-auto p-12 flex flex-col items-center gap-6 ${isDarkMode ? 'bg-[#0a0b10] shadow-inner' : 'bg-slate-200 shadow-inner'}`}>
-        <div className="w-full max-w-[8.5in] flex justify-between items-center no-print px-4">
-          <Link to="/" className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${isDarkMode ? 'bg-slate-800 text-slate-300 hover:text-white' : 'bg-white text-slate-600 hover:text-primary'}`}>
-            <Home className="w-3.5 h-3.5" />
-            Inicio
-          </Link>
+        <div className="w-full max-w-[8.5in] flex justify-end items-center no-print px-4">
           <div className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest ${isDarkMode ? 'bg-slate-800 text-slate-400' : 'bg-white text-slate-400'}`}>
             Modo de Visualización: Carta (Letter)
           </div>
         </div>
 
         <div className="transform scale-90 origin-top lg:scale-100 transition-transform duration-300">
-          <DocumentPreview data={quote} isDarkMode={isDarkMode} brandKey={brandKey} />
+          <DocumentPreview data={quote} isDarkMode={isDarkMode} />
         </div>
       </main>
 
       {/* Floating help or notifications */}
       <div className="fixed bottom-6 right-6 no-print">
         <div className={`${isDarkMode ? 'bg-slate-800 border-slate-700 text-slate-400' : 'bg-white border-slate-200 text-slate-500'} backdrop-blur-md px-4 py-2 rounded-full shadow-lg border text-xs font-medium`}>
-          Auto-guardado: {brandKey}
+          Auto-guardado: Hypernetics
         </div>
       </div>
     </div>
