@@ -14,7 +14,8 @@ dist-ssr
 
 # Env y artefactos generados
 .env
-.env*.local
+.env*
+!.env.example
 /generated
 .playwright-mcp
 
