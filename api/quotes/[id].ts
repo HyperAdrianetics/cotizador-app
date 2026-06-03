@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { route } from '../_lib/http';
-import { prismaRepositories as repos } from '../_lib/repositories/prisma';
-import { getQuote, updateQuote, removeQuote } from '../_lib/services/quotes';
+import { route } from '../_lib/http.js';
+import { prismaRepositories as repos } from '../_lib/repositories/prisma.js';
+import { getQuote, updateQuote, removeQuote } from '../_lib/services/quotes.js';
 
 export default function handler(req: VercelRequest, res: VercelResponse) {
   const id = String(req.query.id);

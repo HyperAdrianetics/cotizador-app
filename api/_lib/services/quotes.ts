@@ -1,6 +1,6 @@
-import { quoteCreateSchema, quoteUpdateSchema } from '../../../shared';
-import { ApiError, parseOr400 } from '../http';
-import type { Repositories } from '../repositories/types';
+import { quoteCreateSchema, quoteUpdateSchema } from '../../../shared/index.js';
+import { ApiError, parseOr400 } from '../http.js';
+import type { Repositories } from '../repositories/types.js';
 
 type Result = { status: number; body?: unknown };
 

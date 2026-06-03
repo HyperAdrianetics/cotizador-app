@@ -1,4 +1,4 @@
-import type { QuoteData } from '../../shared';
+import type { QuoteData } from '../../shared/index.js';
 
 /** Deriva las columnas resumen (desnormalizadas) a partir del QuoteData completo. */
 export function summaryFromQuote(data: QuoteData) {

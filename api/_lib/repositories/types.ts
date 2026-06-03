@@ -8,8 +8,8 @@ import type {
   TextBlockType,
   Quote,
   QuoteSummary,
-} from '../../../shared';
-import type { QuoteData } from '../../../shared';
+} from '../../../shared/index.js';
+import type { QuoteData } from '../../../shared/index.js';
 
 export interface CatalogItemRepo {
   list(): Promise<CatalogItem[]>;

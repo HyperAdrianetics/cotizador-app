@@ -9,15 +9,15 @@ import type {
   Quote,
   QuoteSummary,
   QuoteData,
-} from '../../../shared';
-import { summaryFromQuote } from '../quoteSummary';
+} from '../../../shared/index.js';
+import { summaryFromQuote } from '../quoteSummary.js';
 import type {
   CatalogItemRepo,
   ScopeBlockRepo,
   TextBlockRepo,
   QuoteRepo,
   Repositories,
-} from './types';
+} from './types.js';
 
 /** Implementación en memoria de los repositorios — usada en tests (sin DB). */
 function createClock() {

@@ -1,5 +1,5 @@
-import { prisma } from '../prisma';
-import { summaryFromQuote } from '../quoteSummary';
+import { prisma } from '../prisma.js';
+import { summaryFromQuote } from '../quoteSummary.js';
 import type {
   CatalogItem,
   ScopeBlock,
@@ -7,8 +7,8 @@ import type {
   TextBlockType,
   Quote,
   QuoteData,
-} from '../../../shared';
-import type { Repositories } from './types';
+} from '../../../shared/index.js';
+import type { Repositories } from './types.js';
 
 const iso = (d: Date) => d.toISOString();
 
