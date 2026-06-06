@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Palette, Paintbrush, Sparkles, Image, Camera, Music, Zap, Globe, Star, Heart, Code, Layers } from "lucide-react";
+import { ArrowLeft, Palette, Paintbrush, Sparkles, Image, Camera, Music, Zap, Globe, Star, Heart, Code, Layers } from "lucide-react";
 import mood1 from "../assets/mood-1.jpg";
 import mood2 from "../assets/mood-2.jpg";
 import mood3 from "../assets/mood-3.jpg";
