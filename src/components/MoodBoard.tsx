@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowLeft,
@@ -30,24 +31,52 @@ import react from "../assets/technologies/react.svg";
 import reactnative from "../assets/technologies/reactnative.svg";
 import typescript from "../assets/technologies/typescript.svg";
 
+const paletteColors = [
+  { name: "PRIMARY GREEN", hex: "#a7cf9e", className: "bg-[#a7cf9e]" },
+  { name: "ACCENT YELLOW", hex: "#d2d2af", className: "bg-[#d2d2af]" },
+  {
+    name: "BACKGROUND",
+    hex: "#13151e",
+    className: "bg-[#13151e] border border-white/20",
+  },
+  {
+    name: "PRIMARY BLUE",
+    hex: "#191c29",
+    className: "bg-[#191c29] border border-primary-green/50",
+  },
+  { name: "SECONDARY BLUE", hex: "#383e58", className: "bg-[#383e58]" },
+];
+
 export default function MoodBoard() {
+  const [toast, setToast] = useState<string | null>(null);
+
+  const copyColor = async (name: string, hex: string) => {
+    try {
+      await navigator.clipboard.writeText(hex);
+      setToast(`${name} (${hex})`);
+      setTimeout(() => setToast(null), 2000);
+    } catch {
+      setToast(null);
+    }
+  };
+
   return (
     <section className="min-h-screen min-w-screen bg-gradient-to-br from-background via-primary-blue to-background text-white p-4 md:p-8">
       <div className="mx-auto max-w-[1600px]">
         {/* NAVIGATION HEADER */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8 pb-4 border-b border-primary-yellow/10 no-print">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8 pb-4 border-b border-primary-green/10 no-print">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary-yellow bg-primary-yellow/10 hover:bg-primary-yellow/20 px-4 py-3 rounded-xl transition-all border border-primary-yellow/20 active:scale-95"
+            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary-green bg-primary-green/10 hover:bg-primary-green/20 px-4 py-3 rounded-xl transition-all border border-primary-green/20 active:scale-95"
           >
             <ArrowLeft className="w-4 h-4" />
             Volver al Inicio
           </Link>
         </div>
 
-        <p className="text-primary-yellow text-sm mb-3">Inter Bold</p>
+        <p className="text-primary-green text-sm mb-3">Inter Bold</p>
 
-        <div className="border border-primary-yellow/50 rounded-xl p-5 lg:p-8">
+        <div className="border border-primary-green/50 rounded-xl p-5 lg:p-8">
           {/* HEADER */}
 
           <div className="flex flex-col xl:flex-row justify-between gap-8">
@@ -60,15 +89,15 @@ export default function MoodBoard() {
             </div>
 
             <div>
-              <h1 className="text-primary-yellow text-2xl md:text-4xl xl:text-4xl font-bold uppercase tracking-wide">
+              <h1 className="text-primary-green text-2xl md:text-4xl xl:text-4xl font-bold uppercase tracking-wide">
                 Moodboard de Identidad Corporativa
               </h1>
 
-              <p className="mt-2 text-primary-yellow/70">HEX #d2d2af</p>
+              <p className="mt-2 text-primary-green/70">HEX #d2d2af</p>
             </div>
           </div>
 
-          <div className="border-b border-primary-yellow/30 my-6" />
+          <div className="border-b border-primary-green/30 my-6" />
 
           {/* CONTENT */}
 
@@ -79,9 +108,11 @@ export default function MoodBoard() {
 
             <div className="space-y-4">
               <div className="flex justify-between items-center">
-                <h2 className="text-primary-yellow text-xl">1. THE MOOD</h2>
+                <h2 className="text-primary-green text-xl">1. THE MOOD</h2>
 
-                <span className="text-sm text-primary-yellow/60">Inter Medium</span>
+                <span className="text-sm text-primary-green/60">
+                  Inter Medium
+                </span>
               </div>
 
               <img
@@ -109,11 +140,11 @@ export default function MoodBoard() {
                   Transformamos tus ideas en soluciones digitales.
                 </h3>
 
-                <p className="text-primary-yellow/80 mt-2">
+                <p className="text-primary-green/80 mt-2">
                   (Innovation, Precision, Modernity.)
                 </p>
 
-                <p className="text-sm text-primary-yellow/80/70 mt-1">
+                <p className="text-sm text-primary-green/80/70 mt-1">
                   Inter Regular, HEX #d2d2af
                 </p>
               </div>
@@ -125,42 +156,34 @@ export default function MoodBoard() {
 
             <div>
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-primary-yellow text-xl">2. COLOR PALETTE</h2>
+                <h2 className="text-primary-green text-xl">2. COLOR PALETTE</h2>
 
-                <span className="text-sm text-primary-yellow/60">Inter Medium</span>
+                <span className="text-sm text-primary-green/60">
+                  Inter Medium
+                </span>
               </div>
 
               <div className="grid grid-cols-3 gap-4">
-                <div className="text-center">
-                  <div className="w-20 h-20 rounded-full bg-[#d2d2af] mx-auto" />
-                  <p className="mt-2 text-xs font-semibold">PRIMARY YELLOW</p>
-                  <p className="text-[10px] text-slate-400">#d2d2af</p>
-                </div>
-
-                <div className="text-center">
-                  <div className="w-20 h-20 rounded-full bg-[#a7cf9e] mx-auto" />
-                  <p className="mt-2 text-xs font-semibold">PRIMARY GREEN</p>
-                  <p className="text-[10px] text-slate-400">#a7cf9e</p>
-                </div>
-
-                <div className="text-center">
-                  <div className="w-20 h-20 rounded-full bg-[#13151e] border border-white/20 mx-auto" />
-                  <p className="mt-2 text-xs font-semibold">BACKGROUND</p>
-                  <p className="text-[10px] text-slate-400">#13151e</p>
-                </div>
-
-                <div className="text-center">
-                  <div className="w-20 h-20 rounded-full bg-[#191c29] mx-auto" />
-                  <p className="mt-2 text-xs font-semibold">PRIMARY BLUE</p>
-                  <p className="text-[10px] text-slate-400">#191c29</p>
-                </div>
-
-                <div className="text-center">
-                  <div className="w-20 h-20 rounded-full bg-[#383e58] mx-auto" />
-                  <p className="mt-2 text-xs font-semibold">SECONDARY BLUE</p>
-                  <p className="text-[10px] text-slate-400">#383e58</p>
-                </div>
+                {paletteColors.map((c) => (
+                  <div
+                    key={c.name}
+                    className="text-center cursor-pointer"
+                    onClick={() => copyColor(c.name, c.hex)}
+                  >
+                    <div
+                      className={`w-20 h-20 rounded-full mx-auto transition-transform hover:scale-110 ${c.className}`}
+                    />
+                    <p className="mt-2 text-xs font-semibold">{c.name}</p>
+                    <p className="text-[10px] text-slate-400">{c.hex}</p>
+                  </div>
+                ))}
               </div>
+
+              {toast && (
+                <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-primary-green text-background text-xs font-bold px-5 py-3 rounded-xl shadow-lg animate-pulse">
+                  Copiado: {toast}
+                </div>
+              )}
 
               <img
                 src={codeBg}
@@ -174,11 +197,11 @@ export default function MoodBoard() {
             {/* ====================================== */}
 
             <div>
-              <h2 className="text-primary-yellow text-xl mb-6">3. TYPOGRAPHY</h2>
+              <h2 className="text-primary-green text-xl mb-6">3. TYPOGRAPHY</h2>
 
               <div className="space-y-6">
                 <div>
-                  <p className="text-sm text-primary-yellow/60 mb-3">
+                  <p className="text-sm text-primary-green/60 mb-3">
                     PRIMARY / HEADINGS
                   </p>
 
@@ -191,11 +214,13 @@ export default function MoodBoard() {
                 </div>
 
                 <div>
-                  <p className="text-sm text-primary-yellow/60 mb-2">BODY TEXT</p>
+                  <p className="text-sm text-primary-green/60 mb-2">
+                    BODY TEXT
+                  </p>
 
                   <h3 className="text-3xl">INTER</h3>
 
-                  <p className="text-primary-yellow/80 mt-3">
+                  <p className="text-primary-green/80 mt-3">
                     Digital transformation is a process to innovate, evolve and
                     optimize modern businesses through software solutions and
                     agile methodologies.
@@ -203,7 +228,7 @@ export default function MoodBoard() {
                 </div>
 
                 <div>
-                  <p className="text-sm text-primary-yellow/60 mb-2">
+                  <p className="text-sm text-primary-green/60 mb-2">
                     CODE TEXT: GEIST MONO
                   </p>
 
@@ -222,7 +247,7 @@ export default function MoodBoard() {
             {/* ====================================== */}
 
             <div>
-              <h2 className="text-primary-yellow text-xl mb-6">
+              <h2 className="text-primary-green text-xl mb-6">
                 4. GRAPHIC ELEMENTS & ICONS
               </h2>
 
@@ -243,14 +268,14 @@ export default function MoodBoard() {
                 ].map((Icon, index) => (
                   <div
                     key={index}
-                    className="aspect-square border border-primary-yellow/30 rounded flex items-center justify-center text-xl hover:bg-primary-yellow/10 transition-colors group"
+                    className="aspect-square border border-primary-green/30 rounded flex items-center justify-center text-xl hover:bg-primary-green/10 transition-colors group"
                   >
-                    <Icon className="w-7 h-7 text-primary-yellow/60 group-hover:text-primary-yellow transition-colors" />
+                    <Icon className="w-7 h-7 text-primary-green/60 group-hover:text-primary-green transition-colors" />
                   </div>
                 ))}
               </div>
 
-              <h2 className="text-primary-yellow text-xl mt-8 mb-6">
+              <h2 className="text-primary-green text-xl mt-8 mb-6">
                 5. TECHNOLOGY STACK ICONS
               </h2>
 
@@ -269,7 +294,7 @@ export default function MoodBoard() {
                 ].map((src, index) => (
                   <div
                     key={index}
-                    className="aspect-square border border-primary-yellow/30 rounded flex items-center justify-center hover:bg-primary-yellow/10 transition-colors group"
+                    className="aspect-square border border-primary-green/30 rounded flex items-center justify-center hover:bg-primary-green/10 transition-colors group"
                   >
                     <img
                       src={src}
@@ -286,7 +311,7 @@ export default function MoodBoard() {
                 <div
                   className="
                   h-24
-                  bg-[linear-gradient(90deg,transparent_95%,var(--color-primary-yellow)_95%),linear-gradient(transparent_95%,var(--color-primary-yellow)_95%)]
+                  bg-[linear-gradient(90deg,transparent_95%,var(--color-primary-green)_95%),linear-gradient(transparent_95%,var(--color-primary-green)_95%)]
                   bg-[size:18px_18px]
                   rounded
                 "
@@ -304,7 +329,7 @@ export default function MoodBoard() {
 
         {/* FOOTER */}
 
-        <div className="flex flex-col md:flex-row justify-between items-center mt-6 gap-4 border-t border-primary-yellow/10 pt-4">
+        <div className="flex flex-col md:flex-row justify-between items-center mt-6 gap-4 border-t border-primary-green/10 pt-4">
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-4">
               <img
@@ -315,7 +340,7 @@ export default function MoodBoard() {
             </div>
           </div>
 
-          <p className="text-sm text-primary-yellow/80/70">
+          <p className="text-sm text-primary-green/80/70">
             © Hypernetics. All Rights Reserved.
           </p>
         </div>

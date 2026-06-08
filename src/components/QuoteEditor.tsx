@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { useQuote } from '../hooks/useQuote';
-import { Sidebar } from './Sidebar';
-import { DocumentPreview } from './DocumentPreview';
-import { CatalogPicker } from './catalog/CatalogPicker';
-import { CatalogAdmin } from './catalog/CatalogAdmin';
-import { QuoteList } from './QuoteList';
-import html2pdf from 'html2pdf.js';
-import type { QuoteData, LineItem } from '../types/quote';
-import type { CatalogItem, ScopeBlock, TextBlock } from '../../shared';
+import React, { useState } from "react";
+import { useQuote } from "../hooks/useQuote";
+import { Sidebar } from "./Sidebar";
+import { DocumentPreview } from "./DocumentPreview";
+import { CatalogPicker } from "./catalog/CatalogPicker";
+import { CatalogAdmin } from "./catalog/CatalogAdmin";
+import { QuoteList } from "./QuoteList";
+import html2pdf from "html2pdf.js";
+import type { QuoteData, LineItem } from "../types/quote";
+import type { CatalogItem, ScopeBlock, TextBlock } from "../../shared";
 
 interface QuoteEditorProps {
   initialData: QuoteData;
@@ -15,15 +15,18 @@ interface QuoteEditorProps {
 }
 
 const SAVE_LABEL: Record<string, string> = {
-  idle: 'Auto-guardado: Hypernetics',
-  saving: 'Guardando…',
-  saved: 'Guardado ✓',
-  error: 'Error al guardar',
-  offline: 'Sin conexión (respaldo local)',
+  idle: "Auto-guardado: Hypernetics",
+  saving: "Guardando…",
+  saved: "Guardado ✓",
+  error: "Error al guardar",
+  offline: "Sin conexión (respaldo local)",
 };
 
-export const QuoteEditor: React.FC<QuoteEditorProps> = ({ initialData, isDarkMode = false }) => {
-  const brandKey = 'hypernetics';
+export const QuoteEditor: React.FC<QuoteEditorProps> = ({
+  initialData,
+  isDarkMode = false,
+}) => {
+  const brandKey = "hypernetics";
   const {
     quote,
     quoteId,
@@ -37,7 +40,7 @@ export const QuoteEditor: React.FC<QuoteEditorProps> = ({ initialData, isDarkMod
     deleteQuote,
   } = useQuote(brandKey, initialData);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [modal, setModal] = useState<null | 'catalog' | 'list' | 'admin'>(null);
+  const [modal, setModal] = useState<null | "catalog" | "list" | "admin">(null);
 
   const insertCatalogItem = (item: CatalogItem) => {
     const newItem: LineItem = {
@@ -50,30 +53,37 @@ export const QuoteEditor: React.FC<QuoteEditorProps> = ({ initialData, isDarkMod
   };
 
   const insertScopeBlock = (block: ScopeBlock) => {
-    updateQuote({ scope: [...quote.scope, { title: block.title, items: [...block.items] }] });
+    updateQuote({
+      scope: [...quote.scope, { title: block.title, items: [...block.items] }],
+    });
   };
 
   const insertTextBlock = (block: TextBlock) => {
     switch (block.type) {
-      case 'clause':
+      case "clause":
         updateQuote({ clauses: [...quote.clauses, block.label] });
         break;
-      case 'not_included':
+      case "not_included":
         updateQuote({ notIncluded: [...quote.notIncluded, block.label] });
         break;
-      case 'payment_condition':
-        updateQuote({ paymentConditions: [...quote.paymentConditions, block.label] });
-        break;
-      case 'addon':
+      case "payment_condition":
         updateQuote({
-          addons: [...(quote.addons ?? []), { service: block.label, cost: block.value ?? '' }],
+          paymentConditions: [...quote.paymentConditions, block.label],
+        });
+        break;
+      case "addon":
+        updateQuote({
+          addons: [
+            ...(quote.addons ?? []),
+            { service: block.label, cost: block.value ?? "" },
+          ],
         });
         break;
     }
   };
 
   const exportToPdf = async () => {
-    const element = document.getElementById('quote-document');
+    const element = document.getElementById("quote-document");
     if (!element) return;
 
     // 1. Wait for fonts to ensure proper layout
@@ -81,44 +91,50 @@ export const QuoteEditor: React.FC<QuoteEditorProps> = ({ initialData, isDarkMod
 
     // 2. Fix html2canvas bounding box bug by temporarily removing the parent's scale transform
     const wrapper = element.parentElement;
-    const originalTransform = wrapper ? wrapper.style.transform : '';
-    const originalTransition = wrapper ? wrapper.style.transition : '';
+    const originalTransform = wrapper ? wrapper.style.transform : "";
+    const originalTransition = wrapper ? wrapper.style.transition : "";
     if (wrapper) {
-      wrapper.style.transition = 'none';
-      wrapper.style.transform = 'scale(1)';
+      wrapper.style.transition = "none";
+      wrapper.style.transform = "scale(1)";
     }
 
     // Wait for the unscaled layout to settle
-    await new Promise(resolve => setTimeout(resolve, 300));
+    await new Promise((resolve) => setTimeout(resolve, 300));
 
     // Measure the full scroll height of the unscaled element
     const scrollHeight = element.scrollHeight;
-    const heightInInches = (scrollHeight / 96) + 0.5; // Half-inch buffer to prevent extra pages
+    const heightInInches = scrollHeight / 96 + 0.5; // Half-inch buffer to prevent extra pages
 
     const opt = {
       margin: 0,
       filename: `Cotizacion_Hypernetics_${quote.folio}.pdf`,
-      image: { type: 'jpeg' as const, quality: 1.0 },
+      image: { type: "jpeg" as const, quality: 1.0 },
       html2canvas: {
         scale: 2,
         useCORS: true,
-        backgroundColor: isDarkMode ? quote.colors.secondary : '#ffffff',
+        backgroundColor: isDarkMode ? quote.colors.secondary : "#ffffff",
         scrollY: 0,
         height: scrollHeight, // Force the canvas to be the full height
         windowHeight: scrollHeight,
         removeContainer: true,
         logging: false,
         onclone: (clonedDoc: Document) => {
-          const originalDocElement = document.getElementById('quote-document');
-          const clonedDocElement = clonedDoc.getElementById('quote-document');
+          const originalDocElement = document.getElementById("quote-document");
+          const clonedDocElement = clonedDoc.getElementById("quote-document");
 
           if (originalDocElement && clonedDocElement) {
             // Force the cloned element to have the exact measured height
             clonedDocElement.style.height = `${scrollHeight}px`;
-            clonedDocElement.style.overflow = 'visible';
+            clonedDocElement.style.overflow = "visible";
 
-            const origElements = [originalDocElement, ...Array.from(originalDocElement.getElementsByTagName("*"))];
-            const cloneElements = [clonedDocElement, ...Array.from(clonedDocElement.getElementsByTagName("*"))];
+            const origElements = [
+              originalDocElement,
+              ...Array.from(originalDocElement.getElementsByTagName("*")),
+            ];
+            const cloneElements = [
+              clonedDocElement,
+              ...Array.from(clonedDocElement.getElementsByTagName("*")),
+            ];
 
             const limit = Math.min(origElements.length, cloneElements.length);
             for (let i = 0; i < limit; i++) {
@@ -161,14 +177,17 @@ export const QuoteEditor: React.FC<QuoteEditorProps> = ({ initialData, isDarkMod
             }
           }
 
-          const styles = clonedDoc.querySelectorAll('style');
-          styles.forEach(style => {
+          const styles = clonedDoc.querySelectorAll("style");
+          styles.forEach((style) => {
             if (style.innerHTML) {
-              style.innerHTML = style.innerHTML.replace(/(oklch|oklab|color-mix)\([^)]+\)/g, 'transparent');
+              style.innerHTML = style.innerHTML.replace(
+                /(oklch|oklab|color-mix)\([^)]+\)/g,
+                "transparent",
+              );
             }
           });
 
-          const overrideStyle = clonedDoc.createElement('style');
+          const overrideStyle = clonedDoc.createElement("style");
           overrideStyle.innerHTML = `
             * { 
               box-shadow: none !important;
@@ -198,60 +217,94 @@ export const QuoteEditor: React.FC<QuoteEditorProps> = ({ initialData, isDarkMod
             }
           `;
           clonedDoc.head.appendChild(overrideStyle);
-        }
+        },
       },
       jsPDF: {
-        unit: 'in',
+        unit: "in",
         format: [8.5, heightInInches] as [number, number],
-        orientation: 'portrait' as const,
-        compress: true
+        orientation: "portrait" as const,
+        compress: true,
       },
-      pagebreak: { mode: ['css', 'legacy'] }
+      pagebreak: { mode: ["css", "legacy"] },
     };
 
-    html2pdf().set(opt).from(element).save().then(() => {
-      // 3. Restore the scale transform after generation
-      if (wrapper) {
-        if (!originalTransform) {
-          wrapper.style.removeProperty('transform');
-        } else {
-          wrapper.style.transform = originalTransform;
+    html2pdf()
+      .set(opt)
+      .from(element)
+      .save()
+      .then(() => {
+        // 3. Restore the scale transform after generation
+        if (wrapper) {
+          if (!originalTransform) {
+            wrapper.style.removeProperty("transform");
+          } else {
+            wrapper.style.transform = originalTransform;
+          }
+          if (!originalTransition) {
+            wrapper.style.removeProperty("transition");
+          } else {
+            wrapper.style.transition = originalTransition;
+          }
         }
-        if (!originalTransition) {
-          wrapper.style.removeProperty('transition');
-        } else {
-          wrapper.style.transition = originalTransition;
-        }
-      }
-    });
+      });
   };
 
   return (
-    <div className={`flex h-screen w-full overflow-hidden font-sans ${isDarkMode ? 'bg-slate-900' : 'bg-slate-100'}`}>
+    <div
+      className={`flex h-screen w-full overflow-hidden font-sans ${isDarkMode ? "bg-slate-900" : "bg-slate-100"}`}
+    >
       {/* Toggle button */}
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
-        className={`fixed top-6 left-6 z-50 no-print p-2.5 rounded-xl transition-all lg:hidden ${isDarkMode ? 'bg-slate-800 text-slate-300 hover:bg-slate-700' : 'bg-white text-slate-600 hover:bg-slate-100'} shadow-lg border ${isDarkMode ? 'border-slate-700' : 'border-slate-200'}`}
-        aria-label={sidebarOpen ? 'Cerrar menú' : 'Abrir menú'}
+        className={`fixed top-6 left-6 z-50 no-print p-2.5 rounded-xl transition-all lg:hidden ${isDarkMode ? "bg-slate-800 text-slate-300 hover:bg-slate-700" : "bg-white text-slate-600 hover:bg-slate-100"} shadow-lg border ${isDarkMode ? "border-slate-700" : "border-slate-200"}`}
+        aria-label={sidebarOpen ? "Cerrar menú" : "Abrir menú"}
       >
         {sidebarOpen ? (
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
         ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="18" x2="21" y2="18" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
           </svg>
         )}
       </button>
 
       {/* Mobile backdrop */}
       {sidebarOpen && (
-        <div className="fixed inset-0 bg-black/50 z-40 lg:hidden" onClick={() => setSidebarOpen(false)} />
+        <div
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
       )}
 
       {/* Editor Sidebar */}
-      <div className={`${sidebarOpen ? 'fixed inset-y-0 left-0 z-50' : 'hidden'} lg:block transition-all`}>
+      <div
+        className={`${sidebarOpen ? "fixed inset-y-0 left-0 z-50" : "hidden"} lg:block transition-all`}
+      >
         <Sidebar
           data={quote}
           updateQuote={updateQuote}
@@ -259,16 +312,20 @@ export const QuoteEditor: React.FC<QuoteEditorProps> = ({ initialData, isDarkMod
           duplicateQuote={duplicateQuote}
           exportPdf={exportToPdf}
           isDarkMode={isDarkMode}
-          onOpenCatalog={() => setModal('catalog')}
-          onOpenList={() => setModal('list')}
-          onOpenAdmin={() => setModal('admin')}
+          onOpenCatalog={() => setModal("catalog")}
+          onOpenList={() => setModal("list")}
+          onOpenAdmin={() => setModal("admin")}
         />
       </div>
 
       {/* Preview Area */}
-      <main className={`flex-grow overflow-y-auto p-12 flex flex-col items-center gap-6 ${isDarkMode ? 'bg-background shadow-inner' : 'bg-slate-200 shadow-inner'}`}>
+      <main
+        className={`flex-grow overflow-y-auto p-12 flex flex-col items-center gap-6 ${isDarkMode ? "bg-background shadow-inner" : "bg-slate-200 shadow-inner"}`}
+      >
         <div className="w-full max-w-[8.5in] flex justify-end items-center no-print px-4">
-          <div className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest ${isDarkMode ? 'bg-slate-800 text-slate-400' : 'bg-white text-slate-400'}`}>
+          <div
+            className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest ${isDarkMode ? "bg-slate-800 text-slate-400" : "bg-white text-slate-400"}`}
+          >
             Modo de Visualización: Carta (Letter)
           </div>
         </div>
@@ -281,14 +338,14 @@ export const QuoteEditor: React.FC<QuoteEditorProps> = ({ initialData, isDarkMod
       {/* Floating elements */}
       <div className="fixed top-6 right-6 no-print z-50">
         <div
-          className={`${isDarkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-200'} ${
-            saveStatus === 'error'
-              ? 'text-red-500'
-              : saveStatus === 'offline'
-                ? 'text-amber-500'
+          className={`${isDarkMode ? "bg-slate-800 border-slate-700" : "bg-white border-slate-200"} ${
+            saveStatus === "error"
+              ? "text-red-500"
+              : saveStatus === "offline"
+                ? "text-amber-500"
                 : isDarkMode
-                  ? 'text-slate-400'
-                  : 'text-slate-500'
+                  ? "text-slate-400"
+                  : "text-slate-500"
           } backdrop-blur-md px-4 py-2 rounded-full shadow-lg border text-xs font-medium`}
         >
           {SAVE_LABEL[saveStatus] ?? SAVE_LABEL.idle}
@@ -297,13 +354,27 @@ export const QuoteEditor: React.FC<QuoteEditorProps> = ({ initialData, isDarkMod
 
       <button
         onClick={exportToPdf}
-        className="fixed bottom-6 right-6 no-print z-50 bg-primary-yellow hover:brightness-110 text-white font-bold py-3 px-5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary-yellow/20 active:scale-95"
+        className="fixed bottom-6 right-6 no-print z-50 bg-primary-green hover:brightness-110 text-white font-bold py-3 px-5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary-green/20 active:scale-95"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="7 10 12 15 17 10" />
+          <line x1="12" y1="15" x2="12" y2="3" />
+        </svg>
         Exportar PDF
       </button>
 
-      {modal === 'catalog' && (
+      {modal === "catalog" && (
         <CatalogPicker
           isDarkMode={isDarkMode}
           onClose={() => setModal(null)}
@@ -312,7 +383,7 @@ export const QuoteEditor: React.FC<QuoteEditorProps> = ({ initialData, isDarkMod
           onInsertText={insertTextBlock}
         />
       )}
-      {modal === 'list' && (
+      {modal === "list" && (
         <QuoteList
           quotes={quotes}
           currentId={quoteId}
@@ -333,7 +404,9 @@ export const QuoteEditor: React.FC<QuoteEditorProps> = ({ initialData, isDarkMod
           onDelete={(id) => void deleteQuote(id)}
         />
       )}
-      {modal === 'admin' && <CatalogAdmin isDarkMode={isDarkMode} onClose={() => setModal(null)} />}
+      {modal === "admin" && (
+        <CatalogAdmin isDarkMode={isDarkMode} onClose={() => setModal(null)} />
+      )}
     </div>
   );
 };
