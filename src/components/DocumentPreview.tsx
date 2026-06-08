@@ -52,7 +52,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
                 <div className="flex items-center gap-3">
                   <div className="relative">
                     <div
-                      className="w-10 h-10 rounded-full bg-primary"
+                      className="w-10 h-10 rounded-full bg-primary-yellow"
                       style={{ backgroundColor: data.colors.primary }}
                     />
                   </div>
@@ -63,7 +63,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
                       Hyper
                     </span>
                     <span
-                      className={`text-xl font-light italic block -mt-1 ${isDarkMode ? "text-primary" : "text-slate-500"}`}
+                      className={`text-xl font-light italic block -mt-1 ${isDarkMode ? "text-primary-yellow" : "text-slate-500"}`}
                       style={{
                         color: isDarkMode ? data.colors.primary : undefined,
                       }}
@@ -99,7 +99,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
           >
             <div className="mb-6">
               <p
-                className={`text-sm font-bold uppercase tracking-widest ${isDarkMode ? "text-primary" : "text-slate-400"}`}
+                className={`text-sm font-bold uppercase tracking-widest ${isDarkMode ? "text-primary-yellow" : "text-slate-400"}`}
               >
                 Atención a:
               </p>

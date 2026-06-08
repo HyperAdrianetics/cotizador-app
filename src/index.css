@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #a7cf9e;
-  --color-secondary: #195b7a;
-  --color-accent: #5eead4;
+  --color-primary-yellow: #d2d2af;
+  --color-primary-green: #a7cf9e;
+  --color-background: #13151e;
+  --color-primary-blue: #191c29;
+  --color-secondary-blue: #383e58;
 
   /* Define legacy-compatible colors to avoid oklch issues with html2pdf */
   --color-slate-50: #f8fafc;
@@ -65,7 +67,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #222222;
+  background-color: #13151e;
   color: #111827;
 }
 

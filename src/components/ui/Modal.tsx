@@ -16,7 +16,7 @@ export const Modal: React.FC<ModalProps> = ({ title, icon, onClose, isDarkMode =
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
       <div
         className={`relative w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-2xl border shadow-2xl p-6 ${
-          isDarkMode ? 'bg-[#0f111a] border-slate-800 text-slate-200' : 'bg-white border-slate-200 text-slate-800'
+          isDarkMode ? 'bg-background border-slate-800 text-slate-200' : 'bg-white border-slate-200 text-slate-800'
         }`}
       >
         <div className="flex items-center justify-between mb-5">

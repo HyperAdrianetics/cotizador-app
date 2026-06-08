@@ -38,7 +38,7 @@ export const CatalogAdmin: React.FC<CatalogAdminProps> = ({ isDarkMode = false, 
     void reloadText();
   }, []);
 
-  const input = `border rounded-xl p-2 text-xs outline-none focus:ring-2 focus:ring-primary ${
+  const input = `border rounded-xl p-2 text-xs outline-none focus:ring-2 focus:ring-primary-yellow ${
     isDarkMode ? 'bg-slate-900 border-slate-700 text-white' : 'bg-white border-slate-200'
   }`;
   const card = isDarkMode ? 'border-slate-800 bg-slate-900/50' : 'border-slate-100 bg-slate-50';
@@ -47,7 +47,7 @@ export const CatalogAdmin: React.FC<CatalogAdminProps> = ({ isDarkMode = false, 
     <button
       onClick={() => setTab(id)}
       className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
-        tab === id ? 'bg-primary/15 text-primary' : isDarkMode ? 'text-slate-400 hover:bg-slate-800' : 'text-slate-500 hover:bg-slate-100'
+        tab === id ? 'bg-primary-yellow/15 text-primary-yellow' : isDarkMode ? 'text-slate-400 hover:bg-slate-800' : 'text-slate-500 hover:bg-slate-100'
       }`}
     >
       {icon}
@@ -59,7 +59,7 @@ export const CatalogAdmin: React.FC<CatalogAdminProps> = ({ isDarkMode = false, 
     <button
       onClick={onClick}
       disabled={disabled}
-      className="px-3 py-2 rounded-xl bg-primary text-white text-xs font-bold flex items-center gap-1.5 disabled:opacity-40 hover:brightness-110 transition-all"
+      className="px-3 py-2 rounded-xl bg-primary-yellow text-white text-xs font-bold flex items-center gap-1.5 disabled:opacity-40 hover:brightness-110 transition-all"
     >
       <Plus className="w-4 h-4" /> Agregar
     </button>
@@ -74,7 +74,7 @@ export const CatalogAdmin: React.FC<CatalogAdminProps> = ({ isDarkMode = false, 
   return (
     <Modal
       title="Administrar catálogo"
-      icon={<Settings2 className="w-5 h-5 text-primary" />}
+      icon={<Settings2 className="w-5 h-5 text-primary-yellow" />}
       onClose={onClose}
       isDarkMode={isDarkMode}
     >
@@ -113,7 +113,7 @@ export const CatalogAdmin: React.FC<CatalogAdminProps> = ({ isDarkMode = false, 
           {items.map((it) => (
             <div key={it.id} className={`flex items-center gap-2 p-3 border rounded-xl ${card}`}>
               <span className="text-xs whitespace-pre-line flex-grow">{it.description}</span>
-              <span className="text-[11px] font-bold text-primary">${it.price.toLocaleString('es-MX')}</span>
+              <span className="text-[11px] font-bold text-primary-yellow">${it.price.toLocaleString('es-MX')}</span>
               <DelBtn onClick={async () => { await api.catalogItems.remove(it.id); await reloadItems(); }} />
             </div>
           ))}
@@ -205,7 +205,7 @@ export const CatalogAdmin: React.FC<CatalogAdminProps> = ({ isDarkMode = false, 
           {text.map((t) => (
             <div key={t.id} className={`flex items-center gap-2 p-3 border rounded-xl ${card}`}>
               <div className="flex-grow min-w-0">
-                <span className="text-[9px] font-bold uppercase tracking-wider text-primary">
+                <span className="text-[9px] font-bold uppercase tracking-wider text-primary-yellow">
                   {TEXT_TYPE_LABELS[t.type]}
                 </span>
                 <p className="text-xs truncate">{t.label}</p>

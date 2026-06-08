@@ -128,13 +128,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <div
-      className={`w-96 border-r h-screen overflow-y-auto p-6 flex flex-col gap-8 no-print transition-colors ${isDarkMode ? "bg-[#0f111a] border-slate-800" : "bg-white border-slate-200"}`}
+      className={`w-96 border-r h-screen overflow-y-auto p-6 flex flex-col gap-8 no-print transition-colors ${isDarkMode ? "bg-background border-slate-800" : "bg-white border-slate-200"}`}
     >
       <div className="flex items-center justify-between">
         <h2
           className={`text-xl font-bold flex items-center gap-2 ${isDarkMode ? "text-white" : "text-slate-800"}`}
         >
-          <FileText className="w-5 h-5 text-primary" />
+          <FileText className="w-5 h-5 text-primary-yellow" />
           Editor de Cotización
         </h2>
       </div>
@@ -152,7 +152,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <button
               onClick={onOpenCatalog}
               title="Agregar del catálogo"
-              className="font-medium py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 text-xs transition-all bg-primary/10 text-primary hover:bg-primary/20"
+              className="font-medium py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 text-xs transition-all bg-primary-yellow/10 text-primary-yellow hover:bg-primary-yellow/20"
             >
               <Boxes className="w-4 h-4" />
             </button>
@@ -205,7 +205,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               className={`text-left p-3 rounded-xl border text-xs transition-all ${
                 data.packageName.includes(template.id) ||
                 data.packageName.includes(template.name.split("— ")[1])
-                  ? "border-primary bg-primary/10 text-primary font-bold"
+                  ? "border-primary-yellow bg-primary-yellow/10 text-primary-yellow font-bold"
                   : isDarkMode
                     ? "border-slate-800 bg-slate-900/50 text-slate-400 hover:border-slate-700"
                     : "border-slate-100 bg-slate-50 text-slate-600 hover:border-slate-200"
@@ -233,7 +233,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               type="text"
               value={data.packageName}
               onChange={(e) => updateQuote({ packageName: e.target.value })}
-              className={`w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200"}`}
+              className={`w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-primary-yellow outline-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200"}`}
             />
           </div>
           <div>
@@ -244,7 +244,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               type="text"
               value={data.clientName}
               onChange={(e) => updateQuote({ clientName: e.target.value })}
-              className={`w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200"}`}
+              className={`w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-primary-yellow outline-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200"}`}
             />
           </div>
           <div>
@@ -255,7 +255,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               type="text"
               value={data.company}
               onChange={(e) => updateQuote({ company: e.target.value })}
-              className={`w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200"}`}
+              className={`w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-primary-yellow outline-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200"}`}
             />
           </div>
           <div className="grid grid-cols-2 gap-3">
@@ -267,7 +267,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 type="text"
                 value={data.folio}
                 onChange={(e) => updateQuote({ folio: e.target.value })}
-                className={`w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200"}`}
+                className={`w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-primary-yellow outline-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200"}`}
               />
             </div>
             <div>
@@ -278,7 +278,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 type="text"
                 value={data.date}
                 onChange={(e) => updateQuote({ date: e.target.value })}
-                className={`w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200"}`}
+                className={`w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-primary-yellow outline-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200"}`}
               />
             </div>
           </div>
@@ -295,7 +295,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </h3>
           <button
             onClick={addItem}
-            className="p-1.5 bg-primary/10 text-primary rounded-xl hover:bg-primary/20 transition-colors"
+            className="p-1.5 bg-primary-yellow/10 text-primary-yellow rounded-xl hover:bg-primary-yellow/20 transition-colors"
           >
             <Plus className="w-4 h-4" />
           </button>
@@ -320,7 +320,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   <select
                     value={matchedCatalogId(item)}
                     onChange={(e) => applyCatalogToItem(item.id, e.target.value)}
-                    className={`w-full border rounded-xl p-2.5 text-xs focus:ring-2 focus:ring-primary outline-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200 text-slate-800"}`}
+                    className={`w-full border rounded-xl p-2.5 text-xs focus:ring-2 focus:ring-primary-yellow outline-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200 text-slate-800"}`}
                   >
                     <option value="">— Personalizado —</option>
                     {catalogItems.map((ci) => (
@@ -336,7 +336,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 onChange={(e) =>
                   handleItemChange(item.id, "description", e.target.value)
                 }
-                className={`w-full border rounded-xl p-3 text-xs focus:ring-2 focus:ring-primary outline-none min-h-[70px] resize-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200 text-slate-800"}`}
+                className={`w-full border rounded-xl p-3 text-xs focus:ring-2 focus:ring-primary-yellow outline-none min-h-[70px] resize-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200 text-slate-800"}`}
                 placeholder="Descripción del concepto"
               />
               <div className="grid grid-cols-2 gap-3">
@@ -354,7 +354,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         parseFloat(e.target.value),
                       )
                     }
-                    className={`w-full border rounded-xl p-2.5 text-xs focus:ring-2 focus:ring-primary outline-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200"}`}
+                    className={`w-full border rounded-xl p-2.5 text-xs focus:ring-2 focus:ring-primary-yellow outline-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200"}`}
                   />
                 </div>
                 <div>
@@ -371,7 +371,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         parseFloat(e.target.value),
                       )
                     }
-                    className={`w-full border rounded-xl p-2.5 text-xs focus:ring-2 focus:ring-primary outline-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200"}`}
+                    className={`w-full border rounded-xl p-2.5 text-xs focus:ring-2 focus:ring-primary-yellow outline-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200"}`}
                   />
                 </div>
               </div>
@@ -403,7 +403,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               )}
               <label className="flex-grow">
                 <div
-                  className={`flex items-center justify-center gap-2 px-3 py-3 border-2 border-dashed rounded-xl text-xs transition-all cursor-pointer ${isDarkMode ? "border-slate-800 text-slate-500 hover:border-primary hover:text-primary" : "border-slate-200 text-slate-400 hover:border-primary hover:text-primary"}`}
+                  className={`flex items-center justify-center gap-2 px-3 py-3 border-2 border-dashed rounded-xl text-xs transition-all cursor-pointer ${isDarkMode ? "border-slate-800 text-slate-500 hover:border-primary-yellow hover:text-primary-yellow" : "border-slate-200 text-slate-400 hover:border-primary-yellow hover:text-primary-yellow"}`}
                 >
                   <ImageIcon className="w-4 h-4" />
                   {data.logo ? "Cambiar logo" : "Subir logo"}
@@ -454,7 +454,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       */}
 
       <div
-        className="flex items-center gap-3 p-3 border rounded-xl border-dashed cursor-pointer hover:border-primary transition-all"
+        className="flex items-center gap-3 p-3 border rounded-xl border-dashed cursor-pointer hover:border-primary-yellow transition-all"
         onClick={() =>
           updateQuote({ showItemPrices: !data.showItemPrices })
         }
@@ -465,7 +465,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           onChange={(e) =>
             updateQuote({ showItemPrices: e.target.checked })
           }
-          className="w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary"
+          className="w-4 h-4 rounded border-slate-300 text-primary-yellow focus:ring-primary-yellow"
         />
         <span
           className={`text-xs font-bold ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}
@@ -486,7 +486,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             onClick={() =>
               updateQuote({ clauses: [...data.clauses, "Nueva cláusula"] })
             }
-            className="p-1.5 bg-primary/10 text-primary rounded-xl hover:bg-primary/20 transition-colors"
+            className="p-1.5 bg-primary-yellow/10 text-primary-yellow rounded-xl hover:bg-primary-yellow/20 transition-colors"
           >
             <Plus className="w-4 h-4" />
           </button>
@@ -501,7 +501,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   newClauses[index] = e.target.value;
                   updateQuote({ clauses: newClauses });
                 }}
-                className={`flex-grow border rounded-xl p-2 text-[10px] focus:ring-2 focus:ring-primary outline-none min-h-[50px] resize-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200 text-slate-600"}`}
+                className={`flex-grow border rounded-xl p-2 text-[10px] focus:ring-2 focus:ring-primary-yellow outline-none min-h-[50px] resize-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200 text-slate-600"}`}
               />
               <button
                 onClick={() => {
@@ -532,7 +532,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <textarea
               value={data.deliveryTime}
               onChange={(e) => updateQuote({ deliveryTime: e.target.value })}
-              className={`w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-primary outline-none min-h-[100px] resize-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200"}`}
+              className={`w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-primary-yellow outline-none min-h-[100px] resize-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200"}`}
             />
           </div>
           <div>
@@ -542,7 +542,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <textarea
               value={data.note || ""}
               onChange={(e) => updateQuote({ note: e.target.value })}
-              className={`w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-primary outline-none min-h-[80px] resize-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200"}`}
+              className={`w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-primary-yellow outline-none min-h-[80px] resize-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200"}`}
               placeholder="Ej: La cotización no incluye..."
             />
           </div>
@@ -554,7 +554,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               type="text"
               value={data.observations}
               onChange={(e) => updateQuote({ observations: e.target.value })}
-              className={`w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200"}`}
+              className={`w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-primary-yellow outline-none transition-all ${isDarkMode ? "bg-slate-900 border-slate-700 text-white" : "bg-white border-slate-200"}`}
             />
           </div>
         </div>
@@ -562,7 +562,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       <button
         onClick={exportPdf}
-        className="w-full bg-primary hover:brightness-110 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary/20 active:scale-95"
+        className="w-full bg-primary-yellow hover:brightness-110 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary/20 active:scale-95"
       >
         <Download className="w-5 h-5" />
         Exportar PDF

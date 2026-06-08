@@ -3,10 +3,10 @@ import { FileText, Sparkles, ArrowRight } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="w-full min-w-screen min-h-screen bg-gradient-to-br from-[#0A1320] via-[#121B28] to-[#0A1320] text-white grid grid-rows-[auto_1fr_auto] p-6 relative overflow-hidden font-sans">
+    <div className="w-full min-w-screen min-h-screen bg-gradient-to-br from-background via-primary-blue to-background text-white grid grid-rows-[auto_1fr_auto] p-6 relative overflow-hidden font-sans">
       
       {/* Background decoration */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(183,249,208,0.06),transparent_40%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(210,210,175,0.06),transparent_40%)] pointer-events-none" />
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
       
       {/* TOP HEADER */}
@@ -18,7 +18,7 @@ export default function Home() {
             className="h-6 md:h-7 opacity-85"
           />
         </div>
-        <div className="text-xs text-[#B7F9D0]/70 font-semibold bg-[#B7F9D0]/5 px-3 py-1.5 rounded-full border border-[#B7F9D0]/10">
+        <div className="text-xs text-primary-yellow/70 font-semibold bg-primary-yellow/5 px-3 py-1.5 rounded-full border border-primary-yellow/10">
           v1.0.0 Internal
         </div>
       </header>
@@ -27,7 +27,7 @@ export default function Home() {
       <main className="w-full flex flex-col items-center justify-center text-center z-10">
        
 
-        <h1 className="text-4xl md:text-6xl font-bold uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-white via-[#DDE7E2] to-[#B7F9D0] mb-4">
+        <h1 className="text-4xl md:text-6xl font-bold uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-white via-primary-yellow to-primary-yellow mb-4">
           Hypernetics Portal
         </h1>
         
@@ -41,15 +41,15 @@ export default function Home() {
           {/* CARD 1: COTIZADOR */}
           <Link
             to="/cotizador"
-            className="group relative text-left p-8 rounded-2xl bg-[#111A27]/60 border border-slate-800/80 hover:border-[#B7F9D0]/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(183,249,208,0.05)] overflow-hidden"
+            className="group relative text-left p-8 rounded-2xl bg-primary-blue/60 border border-slate-800/80 hover:border-primary-yellow/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(210,210,175,0.05)] overflow-hidden"
           >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[radial-gradient(circle_at_top_right,rgba(183,249,208,0.08),transparent_70%)] pointer-events-none" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[radial-gradient(circle_at_top_right,rgba(210,210,175,0.08),transparent_70%)] pointer-events-none" />
             
-            <div className="w-12 h-12 rounded-xl bg-slate-800/50 flex items-center justify-center mb-6 group-hover:bg-[#B7F9D0]/10 border border-slate-700/50 group-hover:border-[#B7F9D0]/20 transition-all">
-              <FileText className="w-6 h-6 text-slate-400 group-hover:text-[#B7F9D0] transition-colors" />
+            <div className="w-12 h-12 rounded-xl bg-slate-800/50 flex items-center justify-center mb-6 group-hover:bg-primary-yellow/10 border border-slate-700/50 group-hover:border-primary-yellow/20 transition-all">
+              <FileText className="w-6 h-6 text-slate-400 group-hover:text-primary-yellow transition-colors" />
             </div>
             
-            <h2 className="text-xl font-bold text-white group-hover:text-[#B7F9D0] transition-colors flex items-center gap-2 mb-2">
+            <h2 className="text-xl font-bold text-white group-hover:text-primary-yellow transition-colors flex items-center gap-2 mb-2">
               Cotizador
               <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
             </h2>
@@ -62,15 +62,15 @@ export default function Home() {
           {/* CARD 2: MOOD BOARD */}
           <Link
             to="/moodboard"
-            className="group relative text-left p-8 rounded-2xl bg-[#111A27]/60 border border-slate-800/80 hover:border-[#0096C7]/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,150,199,0.05)] overflow-hidden"
+            className="group relative text-left p-8 rounded-2xl bg-primary-blue/60 border border-slate-800/80 hover:border-secondary-blue/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(56,62,88,0.05)] overflow-hidden"
           >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[radial-gradient(circle_at_top_right,rgba(0,150,199,0.08),transparent_70%)] pointer-events-none" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[radial-gradient(circle_at_top_right,rgba(56,62,88,0.08),transparent_70%)] pointer-events-none" />
             
-            <div className="w-12 h-12 rounded-xl bg-slate-800/50 flex items-center justify-center mb-6 group-hover:bg-[#0096C7]/10 border border-slate-700/50 group-hover:border-[#0096C7]/20 transition-all">
-              <Sparkles className="w-6 h-6 text-slate-400 group-hover:text-[#0096C7] transition-colors" />
+            <div className="w-12 h-12 rounded-xl bg-slate-800/50 flex items-center justify-center mb-6 group-hover:bg-secondary-blue/10 border border-slate-700/50 group-hover:border-secondary-blue/20 transition-all">
+              <Sparkles className="w-6 h-6 text-slate-400 group-hover:text-secondary-blue transition-colors" />
             </div>
             
-            <h2 className="text-xl font-bold text-white group-hover:text-[#0096C7] transition-colors flex items-center gap-2 mb-2">
+            <h2 className="text-xl font-bold text-white group-hover:text-secondary-blue transition-colors flex items-center gap-2 mb-2">
               Branding Mood Board
               <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
             </h2>

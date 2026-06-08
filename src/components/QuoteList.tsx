@@ -29,14 +29,14 @@ export const QuoteList: React.FC<QuoteListProps> = ({
   return (
     <Modal
       title="Cotizaciones"
-      icon={<FolderOpen className="w-5 h-5 text-primary" />}
+      icon={<FolderOpen className="w-5 h-5 text-primary-yellow" />}
       onClose={onClose}
       isDarkMode={isDarkMode}
     >
       <div className="flex gap-2 mb-4">
         <button
           onClick={onNew}
-          className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
+          className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-primary-yellow/10 text-primary-yellow hover:bg-primary-yellow/20 transition-colors"
         >
           <FilePlus2 className="w-4 h-4" /> Nueva
         </button>
@@ -58,7 +58,7 @@ export const QuoteList: React.FC<QuoteListProps> = ({
           <div key={q.id} className={`flex items-center gap-2 p-3 border rounded-xl ${card}`}>
             <button onClick={() => onOpen(q.id)} className="flex-grow text-left min-w-0">
               <div className="flex items-center gap-2">
-                {q.id === currentId && <Check className="w-3.5 h-3.5 text-primary shrink-0" />}
+                {q.id === currentId && <Check className="w-3.5 h-3.5 text-primary-yellow shrink-0" />}
                 <p className="text-xs font-bold truncate">
                   {q.folio} — {q.clientName || 'Sin cliente'}
                 </p>

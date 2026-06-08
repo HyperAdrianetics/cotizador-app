@@ -36,9 +36,9 @@ export const defaultQuote: QuoteData = {
   ],
   logo: "https://hypernetics.com.mx/_next/static/media/hypernetics-logo.7eda4e55.svg",
   colors: {
-    primary: "#a7cf9e",
-    secondary: "#0a0b10",
-    accent: "#d2d2af",
+    primary: "#d2d2af",
+    secondary: "#13151e",
+    accent: "#a7cf9e",
     text: "#f3f4f6",
   },
   packageName: "Nombre del Paquete",

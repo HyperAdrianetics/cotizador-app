@@ -49,7 +49,7 @@ export const CatalogPicker: React.FC<CatalogPickerProps> = ({
       onClick={() => setTab(id)}
       className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
         tab === id
-          ? 'bg-primary/15 text-primary'
+          ? 'bg-primary-yellow/15 text-primary-yellow'
           : isDarkMode
             ? 'text-slate-400 hover:bg-slate-800'
             : 'text-slate-500 hover:bg-slate-100'
@@ -65,7 +65,7 @@ export const CatalogPicker: React.FC<CatalogPickerProps> = ({
   return (
     <Modal
       title="Agregar del catálogo"
-      icon={<Boxes className="w-5 h-5 text-primary" />}
+      icon={<Boxes className="w-5 h-5 text-primary-yellow" />}
       onClose={onClose}
       isDarkMode={isDarkMode}
     >
@@ -83,7 +83,7 @@ export const CatalogPicker: React.FC<CatalogPickerProps> = ({
           {items.map((it) => (
             <Row key={it.id} className={card} onAdd={() => onInsertItem(it)}>
               <span className="text-xs whitespace-pre-line">{it.description}</span>
-              <span className="text-[11px] font-bold text-primary ml-2 shrink-0">
+              <span className="text-[11px] font-bold text-primary-yellow ml-2 shrink-0">
                 ${it.price.toLocaleString('es-MX')}
               </span>
             </Row>
@@ -111,7 +111,7 @@ export const CatalogPicker: React.FC<CatalogPickerProps> = ({
           {text.map((t) => (
             <Row key={t.id} className={card} onAdd={() => onInsertText(t)}>
               <div className="min-w-0">
-                <span className="text-[9px] font-bold uppercase tracking-wider text-primary">
+                <span className="text-[9px] font-bold uppercase tracking-wider text-primary-yellow">
                   {TEXT_TYPE_LABELS[t.type]}
                 </span>
                 <p className="text-xs truncate">{t.label}</p>
@@ -137,7 +137,7 @@ const Row: React.FC<{ className: string; onAdd: () => void; children: React.Reac
     <button
       onClick={onAdd}
       title="Agregar a la cotización"
-      className="p-1.5 bg-primary/10 text-primary rounded-xl hover:bg-primary/20 transition-colors shrink-0"
+      className="p-1.5 bg-primary-yellow/10 text-primary-yellow rounded-xl hover:bg-primary-yellow/20 transition-colors shrink-0"
     >
       <Plus className="w-4 h-4" />
     </button>
