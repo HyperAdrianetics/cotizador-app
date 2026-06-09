@@ -18,6 +18,7 @@ import {
   Boxes,
   FolderOpen,
   Settings2,
+  ChevronDown,
 } from "lucide-react";
 
 interface SidebarProps {
@@ -44,6 +45,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onOpenAdmin,
 }) => {
   const [catalogItems, setCatalogItems] = useState<CatalogItem[]>([]);
+  const [templatesOpen, setTemplatesOpen] = useState(true);
   useEffect(() => {
     api.catalogItems
       .list()
@@ -192,30 +194,36 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       <section className="space-y-4">
-        <h3
-          className={`text-sm font-bold uppercase tracking-wider flex items-center gap-2 ${isDarkMode ? "text-slate-500" : "text-slate-400"}`}
+        <button
+          onClick={() => setTemplatesOpen(!templatesOpen)}
+          className={`w-full text-sm font-bold uppercase tracking-wider flex items-center gap-2 ${isDarkMode ? "text-slate-500" : "text-slate-400"}`}
         >
-          <Sparkles className="w-4 h-4" />
-          Plantillas Hypernetics
-        </h3>
-        <div className="grid grid-cols-1 gap-2">
-          {HYPERNETICS_TEMPLATES.map((template) => (
-            <button
-              key={template.id}
-              onClick={() => applyTemplate(template.id)}
-              className={`text-left p-3 rounded-xl border text-xs transition-all ${
-                data.packageName.includes(template.id) ||
-                data.packageName.includes(template.name.split("— ")[1])
-                  ? "border-primary-green bg-primary-green/10 text-primary-green font-bold"
-                  : isDarkMode
-                    ? "border-slate-800 bg-slate-900/50 text-slate-400 hover:border-slate-700"
-                    : "border-slate-100 bg-slate-50 text-slate-600 hover:border-slate-200"
-              }`}
-            >
-              {template.name}
-            </button>
-          ))}
-        </div>
+          <Sparkles className="w-4 h-4 shrink-0" />
+          <span className="flex-1 text-left">Plantillas Hypernetics</span>
+          <ChevronDown
+            className={`w-4 h-4 transition-transform ${templatesOpen ? "rotate-0" : "-rotate-90"}`}
+          />
+        </button>
+        {templatesOpen && (
+          <div className="grid grid-cols-1 gap-2">
+            {HYPERNETICS_TEMPLATES.map((template) => (
+              <button
+                key={template.id}
+                onClick={() => applyTemplate(template.id)}
+                className={`text-left p-3 rounded-xl border text-xs transition-all ${
+                  data.packageName.includes(template.id) ||
+                  data.packageName.includes(template.name.split("— ")[1])
+                    ? "border-primary-green bg-primary-green/10 text-primary-green font-bold"
+                    : isDarkMode
+                      ? "border-slate-800 bg-slate-900/50 text-slate-400 hover:border-slate-700"
+                      : "border-slate-100 bg-slate-50 text-slate-600 hover:border-slate-200"
+                }`}
+              >
+                {template.name}
+              </button>
+            ))}
+          </div>
+        )}
       </section>
 
       <section className="space-y-4">
@@ -561,7 +569,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       <button
         onClick={exportPdf}
-        className="w-full bg-primary-green hover:brightness-110 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary-green/20 active:scale-95"
+        className="w-full bg-primary-green hover:brightness-110 text-primary-blue font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary-green/20 active:scale-95"
       >
         <Download className="w-5 h-5" />
         Exportar PDF

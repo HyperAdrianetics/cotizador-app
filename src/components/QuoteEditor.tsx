@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 import { useQuote } from "../hooks/useQuote";
 import { Sidebar } from "./Sidebar";
 import { DocumentPreview } from "./DocumentPreview";
@@ -336,7 +338,7 @@ export const QuoteEditor: React.FC<QuoteEditorProps> = ({
       </main>
 
       {/* Floating elements */}
-      <div className="fixed top-6 right-6 no-print z-50">
+      <div className="fixed top-6 right-6 no-print z-50 flex flex-col gap-2">
         <div
           className={`${isDarkMode ? "bg-slate-800 border-slate-700" : "bg-white border-slate-200"} ${
             saveStatus === "error"
@@ -350,11 +352,18 @@ export const QuoteEditor: React.FC<QuoteEditorProps> = ({
         >
           {SAVE_LABEL[saveStatus] ?? SAVE_LABEL.idle}
         </div>
+        <Link
+          to="/"
+          className="inline-flex items-center justify-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-primary-green bg-background/80 hover:bg-primary-green/20 px-3 py-2 rounded-full transition-all border border-primary-green/20 active:scale-95 backdrop-blur-sm"
+        >
+          <ArrowLeft className="w-3 h-3" />
+          Volver al inicio
+        </Link>
       </div>
 
       <button
         onClick={exportToPdf}
-        className="fixed bottom-6 right-6 no-print z-50 bg-primary-green hover:brightness-110 text-white font-bold py-3 px-5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary-green/20 active:scale-95"
+        className="fixed bottom-6 right-6 no-print z-50 bg-primary-green hover:brightness-110 text-primary-blue font-bold py-3 px-5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary-green/20 active:scale-95"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

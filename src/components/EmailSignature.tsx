@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, Copy, Check } from "lucide-react";
 
 export default function EmailSignature() {
-  const [name, setName] = useState("Gabriela Valdes Serafin");
-  const [position, setPosition] = useState("Gerente de Ventas");
-  const [phone, setPhone] = useState("+52 55 2909 8337");
-  const [emailPrefix, setEmailPrefix] = useState("gabriela");
+  const [name, setName] = useState("Max Goodwin");
+  const [position, setPosition] = useState("Director General");
+  const [phone, setPhone] = useState("+52 55 1122 3344");
+  const [emailPrefix, setEmailPrefix] = useState("max");
   const [copied, setCopied] = useState(false);
 
   const email = `${emailPrefix}@hypernetics.com.mx`;
@@ -14,8 +14,8 @@ export default function EmailSignature() {
   const signatureHTML = `
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:650px;background-color:#0b111e;background-image:radial-gradient(circle at 80% 30%,rgba(218,56,114,0.20),transparent 45%),radial-gradient(circle at 65% 70%,rgba(214,142,34,0.20),transparent 45%),radial-gradient(circle at 55% 20%,rgba(46,184,110,0.25),transparent 50%),radial-gradient(circle at 90% 80%,rgba(138,43,226,0.20),transparent 40%);border-radius:12px;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif">
   <tr>
-    <td style="padding:30px 10px 30px 30px;vertical-align:middle;width:190px">
-      <img src="https://hypernetics.com.mx/_next/static/media/hypernetics-logo.7eda4e55.svg" width="180" height="44" alt="Hypernetics" style="display:block;border:0;width:180px;height:44px" />
+    <td style="padding:30px 25px 30px 25px;vertical-align:middle;width:190px">
+      <img src="https://hypernetics.com.mx/_next/static/media/hypernetics-logo.7eda4e55.svg" width="180" height="44" alt="Hypernetics" style="display:block;border:0;width:100%;height:auto" />
     </td>
     <td style="width:1px;border-left:1px solid rgba(255,255,255,0.2);padding:0"></td>
     <td style="padding:25px 30px 25px 35px;vertical-align:middle;text-align:left">
@@ -48,7 +48,7 @@ export default function EmailSignature() {
   };
 
   return (
-    <section className="min-h-screen bg-[#050811] flex flex-col items-center p-6 md:p-10 min-w-screen">
+    <section className="min-h-screen bg-gradient-to-br from-background via-primary-blue to-background flex flex-col items-center p-6 md:p-10 min-w-screen">
       <div className="w-full max-w-[650px]">
         {/* FLOATING BACK BUTTON */}
         <Link
