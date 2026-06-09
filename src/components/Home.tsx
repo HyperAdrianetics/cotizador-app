@@ -62,15 +62,15 @@ export default function Home() {
           {/* CARD 2: MOOD BOARD */}
           <Link
             to="/moodboard"
-            className="group relative text-left p-8 rounded-2xl bg-primary-blue/60 border border-slate-800/80 hover:border-secondary-blue/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(56,62,88,0.05)] overflow-hidden"
+            className="group relative text-left p-8 rounded-2xl bg-primary-blue/60 border border-slate-800/80 hover:border-primary-green/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(210,210,175,0.05)] overflow-hidden"
           >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[radial-gradient(circle_at_top_right,rgba(56,62,88,0.08),transparent_70%)] pointer-events-none" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[radial-gradient(circle_at_top_right,rgba(210,210,175,0.08),transparent_70%)] pointer-events-none" />
 
-            <div className="w-12 h-12 rounded-xl bg-slate-800/50 flex items-center justify-center mb-6 group-hover:bg-secondary-blue/10 border border-slate-700/50 group-hover:border-secondary-blue/20 transition-all">
-              <Sparkles className="w-6 h-6 text-slate-400 group-hover:text-secondary-blue transition-colors" />
+            <div className="w-12 h-12 rounded-xl bg-slate-800/50 flex items-center justify-center mb-6 group-hover:bg-primary-green/10 border border-slate-700/50 group-hover:border-primary-green/20 transition-all">
+              <Sparkles className="w-6 h-6 text-slate-400 group-hover:text-primary-green transition-colors" />
             </div>
 
-            <h2 className="text-xl font-bold text-white group-hover:text-secondary-blue transition-colors flex items-center gap-2 mb-2">
+            <h2 className="text-xl font-bold text-white group-hover:text-primary-green transition-colors flex items-center gap-2 mb-2">
               Branding Mood Board
               <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
             </h2>
